@@ -8,10 +8,10 @@ import jakarta.persistence.Table;
 @Table(name = "Player_Position")
 public class PlayerPosition 
 {
-	@JoinColumn(name = "id_player")
+	@JoinColumn(name = "id_player") //Foreign key collegata alla primary key della tabella Player
 	private int player;
 	
-	@JoinColumn(name = "id_position")
+	@JoinColumn(name = "id_position") //Foreign key collegata alla primary key della tabella Position
 	private int position;
     
 	private boolean is_main;
