@@ -1,6 +1,5 @@
 package com.entities;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
@@ -28,10 +27,10 @@ public class Player    //Entità Player
    
    private String img;
    
-   @JoinColumn(name = "Nation") //Foreign key collegata alla primary key della tabella Nation
+   @JoinColumn(name = "id_nation") //Foreign key collegata alla primary key della tabella Nation
    private int id_nation;      
    
-   @JoinColumn(name = "Team")  //Foreign key collegata alla primary key della tabella Team
+   @JoinColumn(name = "id_team")  //Foreign key collegata alla primary key della tabella Team
    private int id_team; 
    
 }
