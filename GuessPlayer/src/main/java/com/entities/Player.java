@@ -15,8 +15,6 @@ public class Player    //Entità Player
    
    private int overall;
    
-   private String position;
-   
    private int weak_foot;
    
    private int skill_moves;
