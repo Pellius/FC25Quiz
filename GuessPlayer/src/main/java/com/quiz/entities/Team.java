@@ -1,7 +1,8 @@
-package com.entities;
+package com.quiz.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name = "Team")
 public class Team     //Entità Team
 {
+	@Id
    @Column(name = "id_team")
    private int idTeam; //Primary key della tabella Team
    

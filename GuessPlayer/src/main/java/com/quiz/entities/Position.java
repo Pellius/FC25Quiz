@@ -1,13 +1,15 @@
-package com.entities;
+package com.quiz.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Position")
 public class Position     //Entità Position
 {
+	@Id
    @Column(name = "id_position") //Fa riferimento al campo nella tabella 
    private int idPosition; //Primary key della tabella Position
    

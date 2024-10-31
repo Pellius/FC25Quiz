@@ -1,7 +1,8 @@
-package com.entities;
+package com.quiz.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name = "Player_Position") //Fa riferimento alla tabella di associazione tra Player e Position League nel DB
 public class PlayerPosition 
 {
+	@Id
 	@JoinColumn(name = "id_player") //Foreign key collegata alla primary key della tabella Player
 	private int player;
 	
