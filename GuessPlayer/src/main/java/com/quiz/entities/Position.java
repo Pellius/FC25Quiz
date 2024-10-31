@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Position")
+@Table(name = "positions")
 public class Position     //Entità Position
 {
 	@Id

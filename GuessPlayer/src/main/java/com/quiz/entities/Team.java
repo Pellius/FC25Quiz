@@ -4,10 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Team")
+@Table(name = "teams")
 public class Team     //Entità Team
 {
 	@Id
@@ -17,8 +18,9 @@ public class Team     //Entità Team
    @Column(name = "team_name")
    private String teamName;
    
+   @ManyToOne
    @JoinColumn(name = "id_league")  //Foreign key collegata alla primary key della tabella League
-   private int league;
+   private League league;
 
 	public int getIdTeam() {
 		return idTeam;
@@ -36,11 +38,11 @@ public class Team     //Entità Team
 		this.teamName = teamName;
 	}
 	
-	public int getLeague() {
+	public League getLeague() {
 		return league;
 	}
 	
-	public void setLeague(int league) {
+	public void setLeague(League league) {
 		this.league = league;
 	}
 

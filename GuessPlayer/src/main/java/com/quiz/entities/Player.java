@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,11 +32,13 @@ public class Player    //Entità Player
    
    private String img;
    
-   @Column(name = "id_nation") //Foreign key collegata alla primary key della tabella Nation
-   private int nation;      
+   @ManyToOne
+   @JoinColumn(name = "id_nation") //Foreign key collegata alla primary key della tabella Nation
+   private Nation nation;      
    
-   @Column(name = "id_team")  //Foreign key collegata alla primary key della tabella Team
-   private int team;
+   @ManyToOne
+   @JoinColumn(name = "id_team")  //Foreign key collegata alla primary key della tabella Team
+   private Team team;
 
 	public int getIdPlayer() {
 		return idPlayer;
@@ -101,19 +104,19 @@ public class Player    //Entità Player
 		this.img = img;
 	}
 	
-	public int getNation() {
+	public Nation getNation() {
 		return nation;
 	}
 	
-	public void setNation(int nation) {
+	public void setNation(Nation nation) {
 		this.nation = nation;
 	}
 	
-	public int getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 	
-	public void setTeam(int team) {
+	public void setTeam(Team team) {
 		this.team = team;
 	}
    

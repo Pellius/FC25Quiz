@@ -1,39 +1,27 @@
 package com.quiz.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Player_Position") //Fa riferimento alla tabella di associazione tra Player e Position League nel DB
+@Table(name = "player_position") //Fa riferimento alla tabella di associazione tra Player e Position League nel DB
 public class PlayerPosition 
 {
-	@Id
-	@JoinColumn(name = "id_player") //Foreign key collegata alla primary key della tabella Player
-	private int player;
 	
-	@JoinColumn(name = "id_position") //Foreign key collegata alla primary key della tabella Position
-	private int position;
+	@EmbeddedId
+	private PlayerPositionId idPlayerPosition;
     
 	@Column(name = "is_main")
 	private boolean isMain;
 
-	public int getPlayer() {
-		return player;
+	public PlayerPositionId getIdPlayerPosition() {
+		return idPlayerPosition;
 	}
 
-	public void setPlayer(int player) {
-		this.player = player;
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
+	public void setIdPlayerPosition(PlayerPositionId idPlayerPosition) {
+		this.idPlayerPosition = idPlayerPosition;
 	}
 
 	public boolean isMain() {
@@ -44,5 +32,4 @@ public class PlayerPosition
 		this.isMain = isMain;
 	}
 
-	
 }
