@@ -1,7 +1,8 @@
-package com.entities;
+package com.quiz.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name = "players") 
 public class Player    //Entità Player
 {
+	@Id
    @Column(name = "id_player")
    private int idPlayer; //Primary key della tabella Player
    
@@ -29,10 +31,10 @@ public class Player    //Entità Player
    
    private String img;
    
-   @JoinColumn(name = "id_nation") //Foreign key collegata alla primary key della tabella Nation
+   @Column(name = "id_nation") //Foreign key collegata alla primary key della tabella Nation
    private int nation;      
    
-   @JoinColumn(name = "id_team")  //Foreign key collegata alla primary key della tabella Team
+   @Column(name = "id_team")  //Foreign key collegata alla primary key della tabella Team
    private int team;
 
 	public int getIdPlayer() {
