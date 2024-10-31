@@ -1,29 +1,34 @@
 package com.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Nation")
+@Table(name = "nations")
 public class Nation    //Entità Nation
 {
-   private int id_nation; //Primary key della tabella Nation
+   @Column(name = "id_nation")
+   private int idNation; //Primary key della tabella Nation
    
-   private String nation_name;
+   @Column(name = "nation_name")
+   private String nationName;
 
-public int getId_nation() {
-	return id_nation;
-}
+	public int getIdNation() {
+		return idNation;
+	}
+	
+	public void setIdNation(int idNation) {
+		this.idNation = idNation;
+	}
+	
+	public String getNationName() {
+		return nationName;
+	}
+	
+	public void setNationName(String nationName) {
+		this.nationName = nationName;
+	}
 
-public void setId_nation(int id_nation) {
-	this.id_nation = id_nation;
-}
-
-public String getNation_name() {
-	return nation_name;
-}
-
-public void setNation_name(String nation_name) {
-	this.nation_name = nation_name;
-} 
+   
 }

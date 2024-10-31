@@ -1,5 +1,6 @@
 package com.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -7,23 +8,27 @@ import jakarta.persistence.Table;
 @Table(name = "Position")
 public class Position     //Entità Position
 {
-   private int id_position; //Primary key della tabella Position
+   @Column(name = "id_position") //Fa riferimento al campo nella tabella 
+   private int idPosition; //Primary key della tabella Position
    
-   private String position_name;
+   @Column(name = "positionName")
+   private String positionName;
 
-public int getId_position() {
-	return id_position;
-}
+	public int getIdPosition() {
+		return idPosition;
+	}
+	
+	public void setIdPosition(int idPosition) {
+		this.idPosition = idPosition;
+	}
+	
+	public String getPositionName() {
+		return positionName;
+	}
+	
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
 
-public void setId_position(int id_position) {
-	this.id_position = id_position;
-}
-
-public String getPosition_name() {
-	return position_name;
-}
-
-public void setPosition_name(String position_name) {
-	this.position_name = position_name;
-}
+   
 }
