@@ -1,20 +1,22 @@
 package com.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Player_Position")
+@Table(name = "Player_Position") //Fa riferimento alla tabella di associazione tra Player e Position League nel DB
 public class PlayerPosition 
 {
-	@JoinColumn(name = "id_player")
+	@JoinColumn(name = "id_player") //Foreign key collegata alla primary key della tabella Player
 	private int player;
 	
-	@JoinColumn(name = "id_position")
+	@JoinColumn(name = "id_position") //Foreign key collegata alla primary key della tabella Position
 	private int position;
     
-	private boolean is_main;
+	@Column(name = "is_main")
+	private boolean isMain;
 
 	public int getPlayer() {
 		return player;
@@ -32,11 +34,13 @@ public class PlayerPosition
 		this.position = position;
 	}
 
-	public boolean isIs_main() {
-		return is_main;
+	public boolean isMain() {
+		return isMain;
 	}
 
-	public void setIs_main(boolean is_main) {
-		this.is_main = is_main;
+	public void setMain(boolean isMain) {
+		this.isMain = isMain;
 	}
+
+	
 }

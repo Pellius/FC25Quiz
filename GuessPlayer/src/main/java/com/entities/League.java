@@ -1,29 +1,34 @@
 package com.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "League") //Entità League
+@Table(name = "leagues") //Fa riferimento alla tabella League nel DB
 public class League 
 {
-    private int id_league; //Primary key della tabella League
+	@Column(name = "id_league")
+    private int idLeague; //Primary key della tabella League
     
-    private String league_name;
+	@Column(name = "league_name")
+    private String leagueName;
 
-	public int getId_league() {
-		return id_league;
+	public int getIdLeague() {
+		return idLeague;
 	}
 
-	public void setId_league(int id_league) {
-		this.id_league = id_league;
+	public void setIdLeague(int idLeague) {
+		this.idLeague = idLeague;
 	}
 
-	public String getLeague_name() {
-		return league_name;
+	public String getLeagueName() {
+		return leagueName;
 	}
 
-	public void setLeague_name(String league_name) {
-		this.league_name = league_name;
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
 	}
+
+	
 }
