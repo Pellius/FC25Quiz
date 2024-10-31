@@ -1,5 +1,6 @@
 package com.quiz.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,14 @@ public class PlayerService {
 	}
 	
 	public List<Player> getPlayersByName(String playerName) {
-		return playerDAO.findPlayersByPlayerName(playerName);
+		List<Player> res = new ArrayList<>();
+		List<Player> players = playerDAO.findAll();
+		for (Player player : players) {
+			if (player.getPlayerName().toLowerCase().contains(playerName.toLowerCase())) {
+				res.add(player);
+			}
+		}
+		return res;
 	}
 
 }
