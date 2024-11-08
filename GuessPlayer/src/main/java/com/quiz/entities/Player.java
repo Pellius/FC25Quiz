@@ -1,10 +1,13 @@
 package com.quiz.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,6 +42,9 @@ public class Player    //Entità Player
    @ManyToOne
    @JoinColumn(name = "id_team")  //Foreign key collegata alla primary key della tabella Team
    private Team team;
+   
+   @OneToMany(mappedBy = "idPlayerPosition.idPlayer")
+   private List<PlayerPosition> positions;
 
 	public int getIdPlayer() {
 		return idPlayer;
@@ -120,6 +126,13 @@ public class Player    //Entità Player
 		this.team = team;
 	}
    
+	public List<PlayerPosition> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<PlayerPosition> positions) {
+        this.positions = positions;
+    }
    
 }
 
