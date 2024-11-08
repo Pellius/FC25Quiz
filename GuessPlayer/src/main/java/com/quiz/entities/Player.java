@@ -35,6 +35,9 @@ public class Player    //Entità Player
    
    private String img;
    
+   @Column(name = "img_card")
+   private String imgCard;
+   
    @ManyToOne
    @JoinColumn(name = "id_nation") //Foreign key collegata alla primary key della tabella Nation
    private Nation nation;      
@@ -110,6 +113,14 @@ public class Player    //Entità Player
 		this.img = img;
 	}
 	
+	public String getImgCard() {
+		return imgCard;
+	}
+
+	public void setImgCard(String imgCard) {
+		this.imgCard = imgCard;
+	}
+
 	public Nation getNation() {
 		return nation;
 	}
@@ -135,4 +146,3 @@ public class Player    //Entità Player
     }
    
 }
-

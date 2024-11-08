@@ -39,6 +39,7 @@
         #prova li:hover {
             background-color: #f0f0f0;
         }
+
         .table{
             width: 83%;
             margin-left: 100px;
@@ -106,13 +107,25 @@
         .then(response => response.json())
         .then(data => {
             // Aggiorna il messaggio e i dettagli della partita
+            console.log('DATA');
             console.log(data);
             
             if (data.win) {
-                alert('Complimenti hai indovinato!');
+                Swal.fire({
+                    imageUrl: data.player.imgCard,
+                    imageHeight: 250,
+                    imageAlt: data.player.playerName,
+                });
             }
             else if (!data.win && data.gameFinished) {
-                alert(`Hai perso, il giocatore era ${data.player}`);
+                console.log(data.player.imgCard);
+            	Swal.fire({
+                    imageUrl: data.player.imgCard,
+                    imageHeight: 250,
+                    imageAlt: data.player.playerName,
+                    title: 'Hai perso!',
+                    text: `Il giocatore era ${data.player.playerName}`
+                });
             }
         })
         .catch(error => console.error('Errore durante il tentativo di indovinare:', error));
@@ -295,7 +308,7 @@
                                 newRow.appendChild(position);
 
                                 const league = document.createElement('td');
-                                league.innerText = player.team.league.leagueName;
+                                league.innerHTML = `<img src="${player.team.league.imgLeague}" width="50" />`;
                                 if (playerToGuess.team.league.leagueName === player.team.league.leagueName) {
                                     league.style.backgroundColor = 'green';
                                 } else {
@@ -367,6 +380,7 @@
 <!-- JavaScript di Bootstrap e dipendenze -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>
