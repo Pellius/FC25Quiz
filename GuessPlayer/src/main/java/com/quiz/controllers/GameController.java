@@ -36,7 +36,7 @@ public class GameController {
         response.put("attempts", gameService.getAttempts());
         response.put("gameFinished", gameService.isGameFinished());
         response.put("win", gameService.isWin());
-        response.put("player", gameService.getPlayer().getPlayerName());
+        response.put("player", gameService.getPlayer());
 
         return response;
     }

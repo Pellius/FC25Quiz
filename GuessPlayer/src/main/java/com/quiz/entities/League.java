@@ -15,6 +15,9 @@ public class League
     
 	@Column(name = "league_name")
     private String leagueName;
+	
+	@Column(name = "img_league")
+	private String imgLeague;
 
 	public int getIdLeague() {
 		return idLeague;
@@ -32,5 +35,12 @@ public class League
 		this.leagueName = leagueName;
 	}
 
-	
+	public String getImgLeague() {
+		return imgLeague;
+	}
+
+	public void setImgLeague(String imgLeague) {
+		this.imgLeague = imgLeague;
+	}
+
 }
