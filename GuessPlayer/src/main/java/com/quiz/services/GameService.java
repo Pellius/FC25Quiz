@@ -18,9 +18,10 @@ public class GameService {
 	private int attempts;
 	private boolean gameFinished;
 	private boolean win;
+	private Player randomPlayer;
 	
 	public void startGame() {
-		Player randomPlayer = playerDAO.findRandomPlayer();
+		randomPlayer = playerDAO.findRandomPlayer();
 		idPlayerToGuess = randomPlayer.getIdPlayer();
 		System.out.println(idPlayerToGuess);
 		attempts = 0;
@@ -45,7 +46,7 @@ public class GameService {
         if (attempts >= 8) {
             gameFinished = true;
             win = false;
-            return "Tentativi esauriti. Hai perso! Il giocatore era: " + idPlayerToGuess;
+            return "Tentativi esauriti. Hai perso! Il giocatore era: " + randomPlayer.getPlayerName();
         }
 
         return "Tentativo sbagliato! Tentativi rimasti: " + (8 - attempts);
@@ -69,6 +70,10 @@ public class GameService {
 
     public int getAttempts() {
         return attempts;
+    }
+    
+    public String getPlayerName() {
+        return randomPlayer.getPlayerName();
     }
 
 }
