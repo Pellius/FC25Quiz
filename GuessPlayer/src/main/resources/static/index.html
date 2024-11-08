@@ -188,7 +188,15 @@
 
                             const headerTable = document.getElementById('guessHeader');
                                 if(headerTable.children.length === 0){
-                                    const headers = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
+                                    const headers = ['Overall',
+                                        'Age',
+                                        'Height',
+                                        'Nation',
+                                        'Postition',
+                                        'League',
+                                        'Team',
+                                        'Weak foot',
+                                        'Skill moves'];
                                     headers.forEach(text => {
                                         const th = document.createElement('th');
                                         th.textContent = text;
@@ -200,7 +208,22 @@
                                 const guessTable = document.getElementById('guessBody');    
                                 const newRow = document.createElement('tr');
                                 guessTable.innerText = '';
-                                    const body = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
+                                console.log(player);
+                                let positionName;
+                                player.positions.forEach(position => {
+                                    if (position.main) {
+                                        positionName = position.positionName;
+                                    }
+                                });
+                                    const body = [player.overall,
+                                        player.age,
+                                        player.height,
+                                        player.nation.nationName,
+                                        positionName,
+                                        player.team.league.leagueName,
+                                        player.team.teamName,
+                                        player.weakFoot,
+                                        player.skillMoves];
                                     body.forEach(text => {
                                         const td = document.createElement('td');
                                         td.textContent = text;

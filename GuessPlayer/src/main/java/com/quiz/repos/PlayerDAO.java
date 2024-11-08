@@ -13,8 +13,8 @@ import com.quiz.entities.Player;
 public interface PlayerDAO extends JpaRepository<Player, Integer>
 {
 	
-	public List<Player> findPlayersByPlayerName(String playerName);
-	
+    List<Player> findByOverallGreaterThanEqual(int overall);
+
 	@Query(value = "SELECT * FROM players ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	public Player findRandomPlayer();
 		
@@ -22,6 +22,7 @@ public interface PlayerDAO extends JpaRepository<Player, Integer>
             + "JOIN teams t ON p.id_team = t.id_team "
             + "JOIN leagues l ON t.id_league = l.id_league "
             + "WHERE l.league_name = :league "
+            + "AND p.overall >= 80 "
             + "ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	public Player findRandomPlayerByLeague(@Param("league") String league);
 	

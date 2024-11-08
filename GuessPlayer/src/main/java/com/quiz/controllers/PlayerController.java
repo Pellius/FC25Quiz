@@ -28,14 +28,4 @@ public class PlayerController {
 		return playerService.getPlayersByName(playerName);
 	}
 	
-	@GetMapping("/random")
-	public Player getRandomPlayer() {
-		return playerService.getRandomPlayer();
-	}
-	
-	@GetMapping("/random/{league}")
-	public Player getRandomPlayerByLeague(@PathVariable String league) {
-		return playerService.getRandomPlayerByLeague(league);
-	}
-	
 }
