@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +7,42 @@
     <!-- Importa CSS di Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+    
         /* Stile per la lista dei suggerimenti */
         #suggestionsList {
             position: absolute;
             z-index: 1000;
+            margin-left: 100px;
             width: 920px;
             border-top: none;
             max-height: 400px;
             overflow-y: auto;
         }
+
         #suggestionsList li {
             padding: 8px;
-            cursor: pointer;
+			cursor: pointer;
         }
+        
         #suggestionsList li:hover {
             background-color: #f0f0f0;
+        }
+        
+        #prova li {
+            padding: 8px;
+            margin-top: 20px;
+            margin-left: -13px;
+            width: 500px;
+            cursor: pointer;
+        }
+        
+        #prova li:hover {
+            background-color: #f0f0f0;
+        }
+        .table{
+            width: 83%;
+            margin-left: 100px;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -38,17 +59,30 @@
                 <!-- Lista dei suggerimenti -->
                 <ul id="suggestionsList" class="list-group position-absolute"></ul>
             </div>
-            <div class="col-md-2">
-                <input type="button" class="btn btn-primary" value="Cerca">
-            </div>
         </div>
     </div>
+    <div class="col-md-10">
+        <ul id="prova" class="list-group"></ul>
+    </div>
+    <table class="table table-bordered table-striped table-hover text-center">
+    	<thead id="guessHeader"></thead>
+    	<tbody>
+    	<tr id="guessBody">
+    	
+    	</tr>
+    	</tbody>
+    </table>
 </div>
 
 <!-- JavaScript per chiamare l'API e gestire i risultati -->
 <script>
+
     const searchInput = document.getElementById('searchInput');
+    searchInput.style.marginLeft = '100px';
+    
     const suggestionsList = document.getElementById('suggestionsList');
+    const playerDiv = document.getElementById('prova');
+
     
     searchInput.addEventListener('input', function() {
         const playerName = this.value.trim();
@@ -85,7 +119,55 @@
                         listItem.addEventListener('click', () => {
                             searchInput.value = player.playerName;
                             suggestionsList.innerHTML = ''; // Svuota la lista dei suggerimenti
-                        });
+                            
+                            playerDiv.innerHTML = '';
+                            
+                            const selectedPlayer = document.createElement('li');
+                            selectedPlayer.className = 'list-group-item d-flex align-items-center';
+                            selectedPlayer.style.marginLeft = '84px';
+                            
+                            const selectedPlayerImg = document.createElement('img');
+                            selectedPlayerImg.src = player.img;
+                            selectedPlayerImg.alt = player.playerName;
+                            selectedPlayerImg.style.width = '40px';
+
+                            const selectedPlayerName = document.createElement('span');
+                            selectedPlayerName.textContent = player.playerName;
+                            
+                            const buttonPlayer = document.createElement('button');
+                            buttonPlayer.textContent = 'Guess';
+                            buttonPlayer.className = 'btn btn-primary';
+                            buttonPlayer.style.marginLeft = '500px';
+                            const headerTable = document.getElementById('guessHeader');
+                            	if(headerTable.children.length === 0){
+                            		const headers = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
+                            		headers.forEach(text => {
+                            			const th = document.createElement('th');
+                            			th.textContent = text;
+                            			headerTable.appendChild(th);
+                            		});
+                            	}
+                            
+                            buttonPlayer.addEventListener('click', () =>{
+                            	const guessTable = document.getElementById('guessBody');    
+                            	const newRow = document.createElement('tr');
+                            	guessTable.innerText = '';
+                            		const body = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
+                            		body.forEach(text => {
+                            			const td = document.createElement('td');
+                            			td.textContent = text;
+                            			newRow.appendChild(td);
+                            		});
+                            		guessTable.parentNode.appendChild(newRow);
+                             });
+                          
+                            selectedPlayer.appendChild(selectedPlayerImg);
+                            selectedPlayer.appendChild(selectedPlayerName);
+                            
+                            selectedPlayer.appendChild(buttonPlayer);
+                            playerDiv.appendChild(selectedPlayer);
+                            
+                       });
 
                         suggestionsList.appendChild(listItem);
                     });
@@ -94,6 +176,7 @@
         } else {
             // Svuota i suggerimenti se l'input è vuoto
             suggestionsList.innerHTML = '';
+            playerDiv.innerHTML = '';
         }
     });
 
