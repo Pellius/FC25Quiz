@@ -15,7 +15,9 @@ public interface PlayerDAO extends JpaRepository<Player, Integer>
 	
     List<Player> findByOverallGreaterThanEqual(int overall);
 
-	@Query(value = "SELECT * FROM players ORDER BY RAND() LIMIT 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM players "
+			+ "WHERE overall >= 80 "
+			+ "ORDER BY RAND() LIMIT 1", nativeQuery = true)
 	public Player findRandomPlayer();
 		
 	@Query(value = "SELECT p.* FROM players p "
