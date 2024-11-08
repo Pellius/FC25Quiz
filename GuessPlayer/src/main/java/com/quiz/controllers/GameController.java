@@ -19,10 +19,11 @@ public class GameController {
 	GameService gameService;
 	
 	@PostMapping("/start")
-    public Map<String, String> startGame() {
+    public Map<String, Object> startGame() {
         gameService.startGame();
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("message", "Nuova partita iniziata! Hai 8 tentativi per indovinare il giocatore.");
+        response.put("player", gameService.getPlayer());
         return response;
     }
 
@@ -35,7 +36,7 @@ public class GameController {
         response.put("attempts", gameService.getAttempts());
         response.put("gameFinished", gameService.isGameFinished());
         response.put("win", gameService.isWin());
-        response.put("player", gameService.getPlayerName());
+        response.put("player", gameService.getPlayer().getPlayerName());
 
         return response;
     }

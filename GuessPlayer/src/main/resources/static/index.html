@@ -76,6 +76,8 @@
 
 <!-- JavaScript per chiamare l'API e gestire i risultati -->
 <script>
+    let playerToGuess;
+
     function startGame() {
         fetch('/game/start', {
             method: 'POST',
@@ -87,6 +89,7 @@
         .then(data => {
             // Mostra il messaggio di avvio partita all'utente
             console.log(data.message);
+            playerToGuess = data.player;
         })
         .catch(error => console.error('Errore durante l\'avvio della partita:', error));
     }
@@ -207,29 +210,137 @@
                             buttonPlayer.addEventListener('click', () => {
                                 const guessTable = document.getElementById('guessBody');    
                                 const newRow = document.createElement('tr');
+                                newRow.style.color = 'white';
                                 guessTable.innerText = '';
                                 console.log(player);
-                                let positionName;
+                                console.log(playerToGuess);
+
+                                const overall = document.createElement('td');
+                                if (playerToGuess.overall === player.overall) {
+                                    overall.innerText = player.overall;
+                                    overall.style.backgroundColor = 'green';
+                                } else if (playerToGuess.overall > player.overall) {
+                                    overall.innerText = player.overall + '+';
+                                    overall.style.backgroundColor = 'red';
+                                } else if (playerToGuess.overall < player.overall) {
+                                    overall.innerText = player.overall + '-';
+                                    overall.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(overall);
+
+                                const age = document.createElement('td');
+                                if (playerToGuess.age === player.age) {
+                                    age.innerText = player.age;
+                                    age.style.backgroundColor = 'green';
+                                } else if (playerToGuess.age > player.age) {
+                                    age.innerText = player.age + '+';
+                                    age.style.backgroundColor = 'red';
+                                } else if (playerToGuess.age < player.age) {
+                                    age.innerText = player.age + '-';
+                                    age.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(age);
+
+                                const height = document.createElement('td');
+                                if (playerToGuess.height === player.height) {
+                                    height.innerText = player.height;
+                                    height.style.backgroundColor = 'green';
+                                } else if (playerToGuess.height > player.height) {
+                                    height.innerText = player.height + '+';
+                                    height.style.backgroundColor = 'red';
+                                } else if (playerToGuess.height < player.height) {
+                                    height.innerText = player.height + '-';
+                                    height.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(height);
+
+                                const nation = document.createElement('td');
+                                nation.innerText = player.nation.nationName;
+                                if (playerToGuess.nation.nationName === player.nation.nationName) {
+                                    nation.style.backgroundColor = 'green';
+                                } else {
+                                    nation.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(nation);
+
+                                let mainPosition;
+                                let alternativePositions = [];
                                 player.positions.forEach(position => {
                                     if (position.main) {
-                                        positionName = position.positionName;
+                                        mainPosition = position.positionName;
+                                    } else {
+                                        alternativePositions.push(position.positionName);
                                     }
                                 });
-                                    const body = [player.overall,
-                                        player.age,
-                                        player.height,
-                                        player.nation.nationName,
-                                        positionName,
-                                        player.team.league.leagueName,
-                                        player.team.teamName,
-                                        player.weakFoot,
-                                        player.skillMoves];
-                                    body.forEach(text => {
-                                        const td = document.createElement('td');
-                                        td.textContent = text;
-                                        newRow.appendChild(td);
-                                    });
-                                    guessTable.parentNode.appendChild(newRow);
+
+                                let mainPositionToGuess;
+                                let alternativePositionsToGuess = [];
+                                playerToGuess.positions.forEach(position => {
+                                    if (position.main) {
+                                        mainPositionToGuess = position.positionName;
+                                    } else {
+                                        alternativePositionsToGuess.push(position.positionName);
+                                    }
+                                });
+
+                                const position = document.createElement('td');
+                                position.innerText = mainPosition;
+                                if (mainPositionToGuess === mainPosition) {
+                                    position.style.backgroundColor = 'green';
+                                } else if (alternativePositionsToGuess.includes(mainPosition)) {
+                                    position.style.backgroundColor = 'orange';
+                                } else {
+                                    position.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(position);
+
+                                const league = document.createElement('td');
+                                league.innerText = player.team.league.leagueName;
+                                if (playerToGuess.team.league.leagueName === player.team.league.leagueName) {
+                                    league.style.backgroundColor = 'green';
+                                } else {
+                                    league.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(league);
+
+                                const team = document.createElement('td');
+                                team.innerText = player.team.teamName;
+                                if (playerToGuess.team.teamName === player.team.teamName) {
+                                    team.style.backgroundColor = 'green';
+                                } else {
+                                    team.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(team);
+
+                                const weakFoot = document.createElement('td');
+                                weakFoot.innerText = player.weakFoot;
+                                if (playerToGuess.weakFoot === player.weakFoot) {
+                                    weakFoot.innerText = player.weakFoot;
+                                    weakFoot.style.backgroundColor = 'green';
+                                } else if (playerToGuess.weakFoot > player.weakFoot) {
+                                    weakFoot.innerText = player.weakFoot + '+';
+                                    weakFoot.style.backgroundColor = 'red';
+                                } else if (playerToGuess.weakFoot < player.weakFoot) {
+                                    weakFoot.innerText = player.weakFoot + '-';
+                                    weakFoot.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(weakFoot);
+
+                                const skillMoves = document.createElement('td');
+                                skillMoves.innerText = player.skillMoves;
+                                if (playerToGuess.skillMoves === player.skillMoves) {
+                                    skillMoves.innerText = player.skillMoves;
+                                    skillMoves.style.backgroundColor = 'green';
+                                } else if (playerToGuess.skillMoves > player.skillMoves) {
+                                    skillMoves.innerText = player.skillMoves + '+';
+                                    skillMoves.style.backgroundColor = 'red';
+                                } else if (playerToGuess.skillMoves < player.skillMoves) {
+                                    skillMoves.innerText = player.skillMoves + '-';
+                                    skillMoves.style.backgroundColor = 'red';
+                                }
+                                newRow.appendChild(skillMoves);
+
+                                guessTable.parentNode.appendChild(newRow);
                             });
                             
                         });

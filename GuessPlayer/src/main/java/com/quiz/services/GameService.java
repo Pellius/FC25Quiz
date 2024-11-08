@@ -72,8 +72,8 @@ public class GameService {
         return attempts;
     }
     
-    public String getPlayerName() {
-        return randomPlayer.getPlayerName();
+    public Player getPlayer() {
+        return randomPlayer;
     }
 
 }
