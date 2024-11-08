@@ -76,6 +76,46 @@
 
 <!-- JavaScript per chiamare l'API e gestire i risultati -->
 <script>
+    function startGame() {
+        fetch('/game/start', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mostra il messaggio di avvio partita all'utente
+            console.log(data.message);
+        })
+        .catch(error => console.error('Errore durante l\'avvio della partita:', error));
+    }
+
+    function guessPlayer(player) {
+        console.log(player);
+        console.log(player.idPlayer);
+        fetch(`/game/guess?idPlayerGuess=${player.idPlayer}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Aggiorna il messaggio e i dettagli della partita
+            console.log(data);
+            
+            if (data.win) {
+                alert('Complimenti hai indovinato!');
+            }
+            else if (!data.win && data.gameFinished) {
+                alert(`Hai perso, il giocatore era ${data.player}`);
+            }
+        })
+        .catch(error => console.error('Errore durante il tentativo di indovinare:', error));
+    }
+
+    startGame();
 
     const searchInput = document.getElementById('searchInput');
     searchInput.style.marginLeft = '100px';
@@ -138,36 +178,38 @@
                             buttonPlayer.textContent = 'Guess';
                             buttonPlayer.className = 'btn btn-primary';
                             buttonPlayer.style.marginLeft = '500px';
-                            const headerTable = document.getElementById('guessHeader');
-                            	if(headerTable.children.length === 0){
-                            		const headers = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
-                            		headers.forEach(text => {
-                            			const th = document.createElement('th');
-                            			th.textContent = text;
-                            			headerTable.appendChild(th);
-                            		});
-                            	}
-                            
-                            buttonPlayer.addEventListener('click', () =>{
-                            	const guessTable = document.getElementById('guessBody');    
-                            	const newRow = document.createElement('tr');
-                            	guessTable.innerText = '';
-                            		const body = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
-                            		body.forEach(text => {
-                            			const td = document.createElement('td');
-                            			td.textContent = text;
-                            			newRow.appendChild(td);
-                            		});
-                            		guessTable.parentNode.appendChild(newRow);
-                             });
-                          
+                            buttonPlayer.setAttribute('onclick', `guessPlayer(${JSON.stringify(player)})`);
+
                             selectedPlayer.appendChild(selectedPlayerImg);
                             selectedPlayer.appendChild(selectedPlayerName);
                             
                             selectedPlayer.appendChild(buttonPlayer);
                             playerDiv.appendChild(selectedPlayer);
+
+                            const headerTable = document.getElementById('guessHeader');
+                                if(headerTable.children.length === 0){
+                                    const headers = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
+                                    headers.forEach(text => {
+                                        const th = document.createElement('th');
+                                        th.textContent = text;
+                                        headerTable.appendChild(th);
+                                    });
+                                }
                             
-                       });
+                            buttonPlayer.addEventListener('click', () => {
+                                const guessTable = document.getElementById('guessBody');    
+                                const newRow = document.createElement('tr');
+                                guessTable.innerText = '';
+                                    const body = ['Overall', 'Weak foot', 'Skill moves', 'Age', 'Nation', 'Team', 'Postition'];
+                                    body.forEach(text => {
+                                        const td = document.createElement('td');
+                                        td.textContent = text;
+                                        newRow.appendChild(td);
+                                    });
+                                    guessTable.parentNode.appendChild(newRow);
+                            });
+                            
+                        });
 
                         suggestionsList.appendChild(listItem);
                     });
