@@ -15,6 +15,9 @@ public class Nation    //Entità Nation
    
    @Column(name = "nation_name")
    private String nationName;
+   
+   @Column(name = "img_nation")
+   private String imgNation;
 
 	public int getIdNation() {
 		return idNation;
@@ -32,5 +35,12 @@ public class Nation    //Entità Nation
 		this.nationName = nationName;
 	}
 
+	public String getImgNation() {
+		return imgNation;
+	}
+
+	public void setImgNation(String imgNation) {
+		this.imgNation = imgNation;
+	}
    
 }
