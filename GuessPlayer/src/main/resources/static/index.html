@@ -7,7 +7,6 @@
     <!-- Importa CSS di Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    
         /* Stile per la lista dei suggerimenti */
         #suggestionsList {
             position: absolute;
@@ -45,6 +44,18 @@
             margin-left: 100px;
             margin-top: 50px;
         }
+	
+	    td {
+	        width: 100px; /* Larghezza fissa per rendere le celle quadrate */
+	        height: 100px; /* Altezza uguale alla larghezza per fare quadrati */
+	        border: 1px solid #ccc;
+	        text-align: center; /* Centro orizzontale */
+	        font-size: 20px;
+		}
+		
+		.table.custom-table td {
+		    vertical-align: middle; /* Puoi usare anche 'bottom' o 'inherit' */
+		}
     </style>
 </head>
 <body>
@@ -65,7 +76,7 @@
     <div class="col-md-10">
         <ul id="prova" class="list-group"></ul>
     </div>
-    <table class="table table-bordered table-striped table-hover text-center">
+    <table class="table table-bordered table-striped table-hover text-center custom-table">
     	<thead id="guessHeader"></thead>
     	<tbody>
     	<tr id="guessBody">
@@ -91,6 +102,7 @@
             // Mostra il messaggio di avvio partita all'utente
             console.log(data.message);
             playerToGuess = data.player;
+            data.win = false;
         })
         .catch(error => console.error('Errore durante l\'avvio della partita:', error));
     }
@@ -233,10 +245,10 @@
                                     overall.innerText = player.overall;
                                     overall.style.backgroundColor = 'green';
                                 } else if (playerToGuess.overall > player.overall) {
-                                    overall.innerText = player.overall + '+';
+                                    overall.innerText = player.overall + ' ▲';
                                     overall.style.backgroundColor = 'red';
                                 } else if (playerToGuess.overall < player.overall) {
-                                    overall.innerText = player.overall + '-';
+                                    overall.innerText = player.overall + ' ▼';
                                     overall.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(overall);
@@ -246,10 +258,10 @@
                                     age.innerText = player.age;
                                     age.style.backgroundColor = 'green';
                                 } else if (playerToGuess.age > player.age) {
-                                    age.innerText = player.age + '+';
+                                    age.innerText = player.age + ' ▲';
                                     age.style.backgroundColor = 'red';
                                 } else if (playerToGuess.age < player.age) {
-                                    age.innerText = player.age + '-';
+                                    age.innerText = player.age + ' ▼';
                                     age.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(age);
@@ -259,10 +271,10 @@
                                     height.innerText = player.height;
                                     height.style.backgroundColor = 'green';
                                 } else if (playerToGuess.height > player.height) {
-                                    height.innerText = player.height + '+';
+                                    height.innerText = player.height + ' ▲';
                                     height.style.backgroundColor = 'red';
                                 } else if (playerToGuess.height < player.height) {
-                                    height.innerText = player.height + '-';
+                                    height.innerText = player.height + ' ▼';
                                     height.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(height);
@@ -331,10 +343,10 @@
                                     weakFoot.innerText = player.weakFoot;
                                     weakFoot.style.backgroundColor = 'green';
                                 } else if (playerToGuess.weakFoot > player.weakFoot) {
-                                    weakFoot.innerText = player.weakFoot + '+';
+                                    weakFoot.innerText = player.weakFoot + ' ▲';
                                     weakFoot.style.backgroundColor = 'red';
                                 } else if (playerToGuess.weakFoot < player.weakFoot) {
-                                    weakFoot.innerText = player.weakFoot + '-';
+                                    weakFoot.innerText = player.weakFoot + ' ▼';
                                     weakFoot.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(weakFoot);
@@ -345,15 +357,16 @@
                                     skillMoves.innerText = player.skillMoves;
                                     skillMoves.style.backgroundColor = 'green';
                                 } else if (playerToGuess.skillMoves > player.skillMoves) {
-                                    skillMoves.innerText = player.skillMoves + '+';
+                                    skillMoves.innerText = player.skillMoves + ' ▲';
                                     skillMoves.style.backgroundColor = 'red';
                                 } else if (playerToGuess.skillMoves < player.skillMoves) {
-                                    skillMoves.innerText = player.skillMoves + '-';
+                                    skillMoves.innerText = player.skillMoves + ' ▼';
                                     skillMoves.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(skillMoves);
 
-                                guessTable.parentNode.appendChild(newRow);
+                                //guessTable.parentNode.appendChild(newRow);
+                                guessTable.parentNode.insertBefore(newRow, guessTable.children[1]);
                             });
                             
                         });
