@@ -21,6 +21,9 @@ public class Team     //Entità Team
    @ManyToOne
    @JoinColumn(name = "id_league")  //Foreign key collegata alla primary key della tabella League
    private League league;
+   
+   @Column(name = "img_team")
+   private String imgTeam;
 
 	public int getIdTeam() {
 		return idTeam;
@@ -46,5 +49,12 @@ public class Team     //Entità Team
 		this.league = league;
 	}
 
-   
+	public String getImgTeam() {
+		return imgTeam;
+	}
+
+	public void setImgTeam(String imgTeam) {
+		this.imgTeam = imgTeam;
+	}
+
 }

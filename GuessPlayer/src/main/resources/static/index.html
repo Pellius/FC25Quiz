@@ -50,7 +50,7 @@
 	        height: 100px; /* Altezza uguale alla larghezza per fare quadrati */
 	        border: 1px solid #ccc;
 	        text-align: center; /* Centro orizzontale */
-	        font-size: 20px;
+	        font-size: 28px;
 		}
 		
 		.table.custom-table td {
@@ -77,11 +77,11 @@
         <ul id="prova" class="list-group"></ul>
     </div>
     <table class="table table-bordered table-striped table-hover text-center custom-table">
-    	<thead id="guessHeader"></thead>
-    	<tbody>
-    	<tr id="guessBody">
+    	<thead id="guessHeader">
     	
-    	</tr>
+    	</thead>
+    	<tbody id="guessBody">
+    	
     	</tbody>
     </table>
 </div>
@@ -235,7 +235,8 @@
                                 const guessTable = document.getElementById('guessBody');    
                                 const newRow = document.createElement('tr');
                                 newRow.style.color = 'white';
-                                guessTable.innerText = '';
+                                searchInput.value = '';
+
                                 console.log(player);
                                 console.log(playerToGuess);
 
@@ -279,7 +280,7 @@
                                 newRow.appendChild(height);
 
                                 const nation = document.createElement('td');
-                                nation.innerText = player.nation.nationName;
+                                nation.innerHTML = `<img src="${player.nation.imgNation}" width="50" alt="${player.nation.nationName}" />`;
                                 if (playerToGuess.nation.nationName === player.nation.nationName) {
                                     nation.style.backgroundColor = 'green';
                                 } else {
@@ -328,7 +329,8 @@
                                 newRow.appendChild(league);
 
                                 const team = document.createElement('td');
-                                team.innerText = player.team.teamName;
+                                const urlTeam = `./images/${player.team.teamName.toLowerCase().replace(" ", "-")}.png`;
+                                team.innerHTML = `<img src="${urlTeam}" width="65" alt="${player.team.teamName}" />`;
                                 if (playerToGuess.team.teamName === player.team.teamName) {
                                     team.style.backgroundColor = 'green';
                                 } else {
@@ -337,35 +339,40 @@
                                 newRow.appendChild(team);
 
                                 const weakFoot = document.createElement('td');
-                                weakFoot.innerText = player.weakFoot;
+                                for (let i = 0; i < player.weakFoot; i++) {
+                                    const imgStarWF = document.createElement('img');
+                                    imgStarWF.src = './images/star-icon.png';
+                                    imgStarWF.alt = 'star';
+                                    imgStarWF.width = 20;
+                                    weakFoot.appendChild(imgStarWF);
+                                }
                                 if (playerToGuess.weakFoot === player.weakFoot) {
-                                    weakFoot.innerText = player.weakFoot;
                                     weakFoot.style.backgroundColor = 'green';
                                 } else if (playerToGuess.weakFoot > player.weakFoot) {
-                                    weakFoot.innerText = player.weakFoot + ' ▲';
                                     weakFoot.style.backgroundColor = 'red';
                                 } else if (playerToGuess.weakFoot < player.weakFoot) {
-                                    weakFoot.innerText = player.weakFoot + ' ▼';
                                     weakFoot.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(weakFoot);
 
                                 const skillMoves = document.createElement('td');
-                                skillMoves.innerText = player.skillMoves;
+                                for (let i = 0; i < player.weakFoot; i++) {
+                                    const imgStarSM = document.createElement('img');
+                                    imgStarSM.src = './images/star-icon.png';
+                                    imgStarSM.alt = 'star';
+                                    imgStarSM.width = 20;
+                                    skillMoves.appendChild(imgStarSM);                                    
+                                }
                                 if (playerToGuess.skillMoves === player.skillMoves) {
-                                    skillMoves.innerText = player.skillMoves;
                                     skillMoves.style.backgroundColor = 'green';
                                 } else if (playerToGuess.skillMoves > player.skillMoves) {
-                                    skillMoves.innerText = player.skillMoves + ' ▲';
                                     skillMoves.style.backgroundColor = 'red';
                                 } else if (playerToGuess.skillMoves < player.skillMoves) {
-                                    skillMoves.innerText = player.skillMoves + ' ▼';
                                     skillMoves.style.backgroundColor = 'red';
                                 }
                                 newRow.appendChild(skillMoves);
-
-                                //guessTable.parentNode.appendChild(newRow);
-                                guessTable.parentNode.insertBefore(newRow, guessTable.children[1]);
+ 
+                                guessTable.insertBefore(newRow, guessTable.firstChild);
                             });
                             
                         });
