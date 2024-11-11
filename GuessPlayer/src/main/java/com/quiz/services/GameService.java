@@ -26,6 +26,7 @@ public class GameService {
 		System.out.println(idPlayerToGuess);
 		attempts = 0;
 		gameFinished = false;
+		win = false;
 	}
 	
 	public String makeGuess(int idPlayerGuess) {

@@ -102,7 +102,6 @@
             // Mostra il messaggio di avvio partita all'utente
             console.log(data.message);
             playerToGuess = data.player;
-            data.win = false;
         })
         .catch(error => console.error('Errore durante l\'avvio della partita:', error));
     }
